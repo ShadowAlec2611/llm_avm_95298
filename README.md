@@ -23,4 +23,43 @@ En la página de [modelo](https://ollama.com/library) de ollama se busca el mode
 ````bash
 $ ollama pull tinyllama
 ````
+## 4 Prueba de request a la API REST
+
+````bash
+curl -X POST http://localhost:11434/api/generate -d '{
+  "model": "tinyllama",
+  "prompt": "Why is the sky blue?"
+}'
+````
+
+## 5 Realizar un request  a stream
+
+````bash
+$ curl -X POST http://localhost:11434/api/generate -d '{
+  "model": "tinyllama",
+  "prompt": "Why is the sky blue?"
+  "stream" : false
+}'
+````
+
+## 6 Realizar un request a groq 
+
+````bash
+curl "https://api.groq.com/openai/v1/chat/completions" \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer ${GROQ_API_KEY}" \
+  -d '{
+         "messages": [
+           {
+             "role": "user",
+             "content": "¿Por qué el cielo es azul?"
+           }
+         ],
+         "model": "gemma-7b-it",
+         "stream": false
+       }'
+````
+  
+
 
